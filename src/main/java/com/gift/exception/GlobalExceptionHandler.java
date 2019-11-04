@@ -27,6 +27,8 @@ public class GlobalExceptionHandler {
             ObjectError error = errors.get(0);
             String msg = error.getDefaultMessage();
             return Result.error(CodeMsg.BIND_ERROR.fillArgs(msg));//给状态码填充参数
+		} else if(e instanceof NullPointerException) {//空指针异常
+			return Result.error(CodeMsg.NULL_POINT_ERROR.fillArgs("空指针异常"));
 		}
 		return null;
 	}

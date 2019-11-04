@@ -8,5 +8,7 @@ import com.gift.entity.User;
 
 public interface UserRepository extends JpaRepository<User, Integer> {
 	Optional<User> findFirstByUsername(String username);
+	
+	Optional<User> findFirstByMobile(String mobile);
 
 }

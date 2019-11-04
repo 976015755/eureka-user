@@ -22,7 +22,8 @@ public class Result<T> {
 	}
 	
 	public Result(T data) {
-		this.data = data;
+		this.msg = (String) data;
+		//this.data = data;
 	}
 	public Result(CodeMsg codeMsg) {
 		this.code = codeMsg.getCode();

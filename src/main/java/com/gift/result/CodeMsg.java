@@ -17,8 +17,15 @@ public class CodeMsg {
 	public static CodeMsg MOBILE_EMPTY = new CodeMsg(500100, "手机号不能为空");
 	public static CodeMsg PASS_EMPTY = new CodeMsg(500101, "密码不能为空");
 	public static CodeMsg USER_OR_PASS_ERR = new CodeMsg(500102, "用户名或密码错误");
+	public static CodeMsg MOBILE_REG_ERROR = new CodeMsg(500103, "手机号格式错误");
+	public static CodeMsg SEND_CODE_FAILED = new CodeMsg(500104, "发送验证码失败");
+	public static CodeMsg MOBILE_NOT_REG = new CodeMsg(500105, "手机号未注册");
+	public static CodeMsg CODE_REG_ERROR = new CodeMsg(500106, "验证码格式错误");
 	
-	public static CodeMsg BIND_ERROR = new CodeMsg(500101, "参数校验异常：%s");
+	public static CodeMsg BIND_ERROR = new CodeMsg(500201, "参数校验异常：%s");
+	
+	public static CodeMsg NULL_POINT_ERROR = new CodeMsg(500201, "空指针异常");
+	
 	
 	
 	private CodeMsg() {}
