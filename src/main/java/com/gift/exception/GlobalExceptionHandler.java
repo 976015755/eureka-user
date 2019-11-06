@@ -26,8 +26,10 @@ public class GlobalExceptionHandler {
 			List<ObjectError> errors = exception.getAllErrors();//绑定错误返回很多错误，是一个错误列表，只需要第一个错误
             ObjectError error = errors.get(0);
             String msg = error.getDefaultMessage();
+            //TODO 将异常记录到日志
             return Result.error(CodeMsg.BIND_ERROR.fillArgs(msg));//给状态码填充参数
 		} else if(e instanceof NullPointerException) {//空指针异常
+            //TODO 将异常记录到日志
 			return Result.error(CodeMsg.NULL_POINT_ERROR.fillArgs("空指针异常"));
 		}
 		return null;

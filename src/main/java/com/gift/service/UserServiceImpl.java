@@ -70,21 +70,35 @@ public class UserServiceImpl implements UserService {
 		}
 	}
 	
+	/**
+	 * 验证验证码是否有效
+	 */
 	@Override
 	public boolean validCode(String mobileString, String codeString) {
 		////参数格式判断
 		if(!RegexValidataUtils.validatePhone(mobileString)) {
-			throw new GlobalException(CodeMsg.MOBILE_REG_ERROR);
+			System.out.println("手机号格式错误");
+			return false;
+			//throw new GlobalException(CodeMsg.MOBILE_REG_ERROR);
 		}
 		if(!RegexValidataUtils.validatePostCode(codeString)) {
-			throw new GlobalException(CodeMsg.CODE_REG_ERROR);
+			System.out.println("验证码格式错误");
+			return false;
+			//throw new GlobalException(CodeMsg.CODE_REG_ERROR);
 		}
 		
-		//查询redis里是否有该记录及是否匹配
-		String redisCodeString = redisUtils.get(ConstantConfig.REDIS_PRE_SEND_CODE + mobileString).toString();
-		if(redisCodeString.equals(codeString)) {
-			return true;
+		//查询redis里是否有该记录及是否匹配，如果匹配成功，清除key
+		String key = ConstantConfig.REDIS_PRE_SEND_CODE + mobileString;
+		if(redisUtils.exists(key)) {
+			String redisCodeString = redisUtils.get(key).toString();
+			if(redisCodeString.equals(codeString)) {
+				redisUtils.remove(key);
+				return true;
+			}
+		} else {
+			System.out.println(key + "不存在");
 		}
+		
 		return false;
 	}
 	
